@@ -1,7 +1,7 @@
-$('.linked[data-list-thumb-l-id]').click(function (event) {
+$('.linked[data-thumb-l-item-id]').click(function (event) {
     event.preventDefault();
 
-    var data = Fliplet.Widget.getData($(this).parents('[data-thumb-l-item-id]').data('thumb-l-item-id'));
+    var data = Fliplet.Widget.getData($(this).parents('[data-list-thumb-l-id]').data('list-thumb-l-id'));
 
     var itemData = _.find(data.items,{id: $(this).data('thumb-l-item-id')});
 
