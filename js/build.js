@@ -1,6 +1,10 @@
 $('.linked[data-thumb-l-item-id]').click(function(event) {
   event.preventDefault();
 
+  if ($(this).parents('.list-swipe.swiping').length) {
+    return;
+  }
+
   var data = Fliplet.Widget.getData($(this).parents('[data-list-thumb-l-id]').data('list-thumb-l-id'));
   var itemData = _.find(data.items, {
     id: $(this).data('thumb-l-item-id')
