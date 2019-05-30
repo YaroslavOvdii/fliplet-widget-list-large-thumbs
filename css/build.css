@@ -80,7 +80,7 @@
 	justify-content: center;
 	font-size: 50px;
 }
-.list.list-thumb-l ul > li.linked .list-icon {
+.list.list-thumb-l ul > li .list-icon {
 	display: none;
 }
 
