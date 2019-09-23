@@ -340,9 +340,9 @@ function initImageProvider(item) {
     selectFiles: item.imageConf ? [item.imageConf] : [],
     selectMultiple: false,
     type: 'image',
-    fileExtension: ['JPG', 'JPEG', 'PNG', 'GIF', 'TIFF'],
     autoSelectOnUpload: true
-  }
+  };
+  
   imageProvider = Fliplet.Widget.open('com.fliplet.file-picker', {
     // Also send the data I have locally, so that
     // the interface gets repopulated with the same stuff
