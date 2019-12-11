@@ -25,7 +25,7 @@ Fliplet.Widget.instance('list-thumb-l', function (data) {
       id: $(this).data('thumb-l-item-id')
     });
 
-    if (_.get(itemData, 'linkAction') && !_.isEmpty(_.get(itemData, 'linkAction'))) {
+    if (_.get(itemData, 'linkAction') && !_.isEmpty(itemData.linkAction)) {
       Fliplet.Navigate.to(itemData.linkAction);
     }
   });
