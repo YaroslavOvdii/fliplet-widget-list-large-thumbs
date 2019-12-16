@@ -14,7 +14,7 @@ Fliplet.Widget.instance('list-thumb-l', function (data) {
     });
   }
 
-  $conatiner.on('click', '.linked[data-thumb-l-item-id]', function(event) {
+  $container.on('click', '.linked[data-thumb-l-item-id]', function(event) {
     event.preventDefault();
 
     if ($(this).parents('.list-swipe.swiping').length) {
