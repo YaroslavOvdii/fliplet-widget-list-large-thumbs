@@ -80,7 +80,7 @@ setTimeout(function() {
 
       save(false, true);
     },
-    sort: function(event, ui) {
+    sort: function() {
       $('.panel-group').sortable('refresh');
       $('.tab-content').trigger('scroll');
     }
@@ -108,6 +108,10 @@ $('.tab-content')
     checkPanelLength();
   })
   .on('click', '.add-image', function() {
+    if (imageProvider) {
+      return;
+    }
+
     var $item = $(this).closest('[data-id], .panel');
     var id = $item.data('id');
     var item = _.find(data.items, {
@@ -134,6 +138,10 @@ $('.tab-content')
     save();
   })
   .on('click', '.add-icon', function() {
+    if (iconProvider) {
+      return;
+    }
+
     var $item = $(this).closest('[data-id], .panel');
     var id = $item.data('id');
     var item = _.find(data.items, {
@@ -226,7 +234,7 @@ $('.tab-content')
 var contentHeight = $('body > .form-horizontal').outerHeight();
 var tabPaneTopPadding = 78;
 
-$('body > .form-horizontal').scroll(function(event) {
+$('body > .form-horizontal').scroll(function() {
   var tabContentScrollPos = Math.abs($('.tab-pane-content').position().top - tabPaneTopPadding);
   var tabPaneHeight = tabPaneTopPadding + $('.tab-pane-content').height();
 
