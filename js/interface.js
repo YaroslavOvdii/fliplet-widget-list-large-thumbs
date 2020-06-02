@@ -294,7 +294,8 @@ function initLinkProvider(item) {
   linkPromises.push(linkActionProvider);
 }
 
-function initListener(provider, item) { 
+function initListener(provider, item) {
+
   window.addEventListener('message', function onMessage(event) {
     // Removes listener and enables the cancel button when the provider is saved and closed
     if (event.data === 'save-widget') {
@@ -310,35 +311,38 @@ function initListener(provider, item) {
         case 'image':
           onImageClose(item);
           break;
+        default:
+          break;
       }
 
       window.removeEventListener('message', onMessage);
       Fliplet.Widget.toggleCancelButton(true);
+      Fliplet.Widget.toggleSaveButton(true);
       Fliplet.Widget.resetSaveButtonLabel();
     }
   });
 }
 
 function onIconClose(item) {
-    iconProvider.close();
+  iconProvider.close();
 
-    if (!item.icon.length) {
-      $('[data-id="' + item.id + '"] .add-icon-holder').find('.add-icon').text('Select an icon');
-      $('[data-id="' + item.id + '"] .add-icon-holder').find('.icon-holder').addClass('hidden');
-    }
+  if (!item.icon.length) {
+    $('[data-id="' + item.id + '"] .add-icon-holder').find('.add-icon').text('Select an icon');
+    $('[data-id="' + item.id + '"] .add-icon-holder').find('.icon-holder').addClass('hidden');
+  }
 
-    iconProvider = null;
+  iconProvider = null;
 }
 
 function onImageClose(item) {
-    imageProvider.close();
+  imageProvider.close();
 
-    if (_.isEmpty(item.imageConf)) {
-      $('[data-id="' + item.id + '"] .add-image-holder').find('.add-image').text('Add image');
-      $('[data-id="' + item.id + '"] .add-image-holder').find('.thumb-holder').addClass('hidden');
-    }
+  if (_.isEmpty(item.imageConf)) {
+    $('[data-id="' + item.id + '"] .add-image-holder').find('.add-image').text('Add image');
+    $('[data-id="' + item.id + '"] .add-image-holder').find('.thumb-holder').addClass('hidden');
+  }
 
-    imageProvider = null;
+  imageProvider = null;
 }
 
 var iconProvider;
@@ -351,8 +355,15 @@ function initIconProvider(item) {
     data: item,
     // Events fired from the provider
     onEvent: function(event, data) {
-      if (event === 'interface-validate') {
-        Fliplet.Widget.toggleSaveButton(data.isValid === true);
+      switch (event) {
+        case 'interface-validate':
+          Fliplet.Widget.toggleSaveButton(!!data.isValid);
+          break;
+        case 'icon-clicked':
+          Fliplet.Widget.toggleSaveButton(data.isSelected);
+          break;
+        default:
+          break;
       }
     }
   });
